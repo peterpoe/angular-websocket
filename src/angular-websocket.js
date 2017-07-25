@@ -2,14 +2,6 @@ import angular from 'angular';
 
 var Socket;
 
-if (typeof window === 'undefined') {
-  try {
-    var ws = require('ws');
-
-    Socket = (ws.Client || ws.client || ws);
-  } catch(e) {}
-}
-
 // Browser
 Socket = (Socket || window.WebSocket || window.MozWebSocket);
 
