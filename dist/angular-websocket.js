@@ -17,12 +17,23 @@
     value: true
   });
 
-  var _angular2 = _interopRequireDefault(_angular);
+  var angular = _interopRequireWildcard(_angular);
 
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-      default: obj
-    };
+  function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) {
+      return obj;
+    } else {
+      var newObj = {};
+
+      if (obj != null) {
+        for (var key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+        }
+      }
+
+      newObj.default = obj;
+      return newObj;
+    }
   }
 
   var Socket;
@@ -30,15 +41,15 @@
   // Browser
   Socket = Socket || window.WebSocket || window.MozWebSocket;
 
-  var noop = _angular2.default.noop;
+  var noop = angular.noop;
   var objectFreeze = Object.freeze ? Object.freeze : noop;
   var objectDefineProperty = Object.defineProperty;
-  var isString = _angular2.default.isString;
-  var isFunction = _angular2.default.isFunction;
-  var isDefined = _angular2.default.isDefined;
-  var isObject = _angular2.default.isObject;
-  var isArray = _angular2.default.isArray;
-  var forEach = _angular2.default.forEach;
+  var isString = angular.isString;
+  var isFunction = angular.isFunction;
+  var isDefined = angular.isDefined;
+  var isObject = angular.isObject;
+  var isArray = angular.isArray;
+  var forEach = angular.forEach;
   var arraySlice = Array.prototype.slice;
   // ie8 wat
   if (!Array.prototype.indexOf) {
@@ -137,10 +148,10 @@
     $WebSocket.prototype._connect = function _connect(force) {
       if (force || !this.socket || this.socket.readyState !== this._readyStateConstants.OPEN) {
         this.socket = $websocketBackend.create(this.url, this.protocols);
-        this.socket.onmessage = _angular2.default.bind(this, this._onMessageHandler);
-        this.socket.onopen = _angular2.default.bind(this, this._onOpenHandler);
-        this.socket.onerror = _angular2.default.bind(this, this._onErrorHandler);
-        this.socket.onclose = _angular2.default.bind(this, this._onCloseHandler);
+        this.socket.onmessage = angular.bind(this, this._onMessageHandler);
+        this.socket.onopen = angular.bind(this, this._onOpenHandler);
+        this.socket.onerror = angular.bind(this, this._onErrorHandler);
+        this.socket.onclose = angular.bind(this, this._onCloseHandler);
         this.socket.binaryType = this.binaryType;
       }
     };
@@ -322,7 +333,7 @@
       var backoffDelaySeconds = backoffDelay / 1000;
       console.log('Reconnecting in ' + backoffDelaySeconds + ' seconds');
 
-      $timeout(_angular2.default.bind(this, this._connect), backoffDelay);
+      $timeout(angular.bind(this, this._connect), backoffDelay);
 
       return this;
     };
@@ -393,10 +404,10 @@
     };
   }
 
-  _angular2.default.module('ngWebSocket', []).factory('$websocket', ['$rootScope', '$q', '$timeout', '$websocketBackend', $WebSocketProvider]).factory('WebSocket', ['$rootScope', '$q', '$timeout', 'WebsocketBackend', $WebSocketProvider]).service('$websocketBackend', ['$log', $WebSocketBackendProvider]).service('WebSocketBackend', ['$log', $WebSocketBackendProvider]);
+  angular.module('ngWebSocket', []).factory('$websocket', ['$rootScope', '$q', '$timeout', '$websocketBackend', $WebSocketProvider]).factory('WebSocket', ['$rootScope', '$q', '$timeout', 'WebsocketBackend', $WebSocketProvider]).service('$websocketBackend', ['$log', $WebSocketBackendProvider]).service('WebSocketBackend', ['$log', $WebSocketBackendProvider]);
 
-  _angular2.default.module('angular-websocket', ['ngWebSocket']);
+  angular.module('angular-websocket', ['ngWebSocket']);
 
-  exports.default = _angular2.default.module('ngWebSocket');
+  exports.default = angular.module('ngWebSocket');
   module.exports = exports['default'];
 });
