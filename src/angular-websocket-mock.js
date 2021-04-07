@@ -117,4 +117,4 @@ angular.module('ngWebSocketMock', [])
 
 angular.module('angular-websocket-mock', ['ngWebSocketMock']);
 
-module.exports = angular.module('ngWebSocketMock');
+export default angular.module('ngWebSocketMock');
