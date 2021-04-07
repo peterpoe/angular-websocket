@@ -1,5 +1,3 @@
-import angular from 'angular';
-
 function $WebSocketBackend() {
   var connectQueue = [];
   var pendingConnects = [];
