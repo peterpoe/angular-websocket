@@ -9,7 +9,6 @@
 karma.conf.js
 dist.sh
 bower.json
-src/
 example/
 test/
 bower_components/
